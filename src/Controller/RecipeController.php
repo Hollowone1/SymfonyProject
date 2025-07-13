@@ -19,10 +19,12 @@ final class RecipeController extends AbstractController
     }
 
     #[Route('/recipe/{slug}-{id}', name: 'recipe_show', requirements: ['slug' => '[a-z0-9\-]+', 'id' => '\d+'])]
-    public function show(): Response
+    public function show(Request $request, string $slug, int $id): Response
     {
-        return $this->render('recipe/show.html.twig', [
-            'controller_name' => 'RecipeController',
+        return $this->render('recipe/show.html.twig', 
+        [
+            'slug' => $slug,
+            'id' => $id 
         ]);
     }
 }

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{slug}}-{{id}}{% endblock %}
+
+{% block body %}
+    <h1 class="text-4xl">Recipes</h1>
+    <ul class="list-disc pl-5 text-xl">
+                <li> {{slug}}-{{id}}</li>
+    </ul>
+{% endblock %}

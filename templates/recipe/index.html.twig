@@ -5,14 +5,7 @@
 {% block body %}
     <h1 class="text-4xl">Recipes</h1>
     <ul class="list-disc pl-5 text-xl">
-        {% if recipes is empty %}
                 <li class="text-emerald-500 py-1 my-1">No recipes found.</li>
-        {% endif %}
-        {% if recipes is not empty %}
-            {% for recipe in recipes %}
-                <li>{{ recipe.name }} - {{ recipe.description }}</li>
-            {% endfor %}
-        {% endif %}
-        
+                <li> tarte au thon - une tarte au thon</li>
     </ul>
 {% endblock %}
