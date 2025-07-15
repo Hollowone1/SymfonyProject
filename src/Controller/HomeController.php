@@ -13,8 +13,8 @@ final class HomeController extends AbstractController
     #[Route(path: '/', name: 'accueil')]
     function index(Request $request):Response 
     {
-        return New Response(
-            
-        );
+            return $this->render('home/index.html.twig', [
+                'controller_name' => 'HomeController',
+            ]);
     }
 }

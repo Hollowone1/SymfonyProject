@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class RecipeController extends AbstractController
 {
 
-    #[Route('/recipe', name: 'recipe_index')]
+    #[Route('/recipe', name: 'recette')]
     public function index(Request $request): Response
     {
         return $this->render('recipe/index.html.twig', [
