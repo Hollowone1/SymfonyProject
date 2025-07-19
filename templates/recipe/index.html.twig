@@ -3,9 +3,30 @@
 {% block title %}Recipes{% endblock %}
 
 {% block body %}
-    <h1 class="text-4xl">Recipes</h1>
-    <ul class="list-disc pl-5 text-xl">
-                <li class="text-emerald-500 py-1 my-1">No recipes found.</li>
-                <li> tarte au thon - une tarte au thon</li>
-    </ul>
+    <table class="table-auto w-full">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="px-4 py-2">ID</th>
+                <th class="px-4 py-2">Title</th>
+                <th class="px-4 py-2">Slug</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipes %}
+                <tr class="border-b">
+                    <td class="px-4 py-2">{{ recipe.id }}</td>
+                    <td class="px-4 py-2">{{ recipe.title }}</td>
+                    <td class="px-4 py-2">{{ recipe.slug }}</td>
+                    <td class="px-4 py-2">
+                        <a href="{{ path('show', { 'slug': recipe.slug, 'id': recipe.id }) }}" class="text-blue-500 hover:underline">Voir</a>
+                        <a href="{{ path('edit', { 'id': recipe.id }) }}" class="text-green-500 hover:underline ml-2">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center text-red-500">Aucune recette trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
 {% endblock %}

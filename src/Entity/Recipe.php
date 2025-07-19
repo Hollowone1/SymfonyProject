@@ -3,30 +3,35 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+#[ORM\GeneratedValue]
+#[ORM\Column(type: Types::INTEGER)]
+private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+#[ORM\Column(type: Types::STRING, length: 255)]
+private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+#[ORM\Column(type: Types::STRING, length: 255)]
+private ?string $slug = null;
 
-    #[ORM\Column(length: 1024)]
-    private ?string $content = null;
+#[ORM\Column(type: Types::TEXT)]
+private ?string $content = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+#[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updated_at = null;
+#[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+private ?\DateTimeImmutable $updated_at = null;
+
+#[ORM\Column]
+private ?int $duration = null;
+
 
     public function getId(): ?int
     {
@@ -57,7 +62,7 @@ class Recipe
         return $this;
     }
 
-     public function getContent(): ?string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -89,6 +94,18 @@ class Recipe
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
 
         return $this;
     }
