@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use App\Entity\Recipe;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface as EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +39,7 @@ final class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipe/{id}/edit', name: 'edit')]
+    #[Route('/recipe/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, int $id, Recipe $recipe, EntityManager $em): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -73,5 +73,15 @@ final class RecipeController extends AbstractController
             'form' => $form->createView(),
             'controller_name' => 'RecipeController',
         ]);
+    }
+
+    #[Route('/recipe/{id}/edit',name:'recipe_delete', methods:['DELETE'])]
+    public function delete(Request $request, Recipe $recipe, RecipeRepository $repository, EntityManager $em): Response
+    {
+        $recipe = $repository->find($recipe);
+        $em->remove($recipe);
+        $em->flush();
+        $this->addFlash('success', 'Recette supprimée avec succès !');
+        return $this->redirectToRoute('recipe_index');
     }
 }
