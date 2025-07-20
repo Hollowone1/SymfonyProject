@@ -20,37 +20,10 @@ class RecipeType extends AbstractType
         $builder
             ->add('title', TextType::class,[
                 'label' => 'Titre',
-                Constraint::class => [
-                    new \Symfony\Component\Validator\Constraints\NotBlank([
-                        'message' => 'Le titre ne peut pas être vide.',
-                    ]),
-                    new \Symfony\Component\Validator\Constraints\Length([
-                        'max' => 255,
-                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.',
-                        'min' => 3,
-                        'minMessage' => 'Le titre doit comporter au moins {{ limit }} caractères.',
-                    ]),
-                    new Regex([
-                        'pattern'=>'/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{1,16}$/',
-                        'message' => 'ne peut contenir que des lettres minuscules et majuscules, des chiffres et des tirets',
-                    ]),
-                ],
             ])
             ->add('slug', TextType::class, [
                 'label' => 'Slug',
                 'required' => false,
-                Constraint::class => [
-                    new \Symfony\Component\Validator\Constraints\Length([
-                        'max' => 255,
-                        'maxMessage' => 'Le slug ne peut pas dépasser {{ limit }} caractères.',
-                        'min' => 3,
-                        'minMessage' => 'Le slug doit comporter au moins {{ limit }} caractères.',
-                    ]),
-                    new Regex([
-                        'pattern'=>'/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{1,16}$/',
-                        'message' => 'ne peut contenir que des lettres minuscules et majuscules, des chiffres et des tirets',
-                    ]),
-                ],
             ])
             ->add('content')
             ->add('created_at', null, [

@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
+use App\Validator\BanWord;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[UniqueEntity(fields: ['title'], message: 'Ce titre est déjà utilisé.')]
+#[UniqueEntity(fields: ['slug'], message: 'Ce slug est déjà utilisé.')]
 class Recipe
 {
     #[ORM\Id]
@@ -15,9 +20,28 @@ class Recipe
 private ?int $id = null;
 
 #[ORM\Column(type: Types::STRING, length: 255)]
+#[Assert\Length(
+    min: 3,
+    max: 255,
+    minMessage: 'Le titre doit comporter au moins {{ limit }} caractères.',
+    maxMessage: 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+)]
+#[Assert\Regex(
+    pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{1,16}$/',
+)]
 private ?string $title = null;
 
 #[ORM\Column(type: Types::STRING, length: 255)]
+#[Assert\Length(
+    min: 3,
+    max: 255,
+    minMessage: 'Le slug doit comporter au moins {{ limit }} caractères.',
+    maxMessage: 'Le slug ne peut pas dépasser {{ limit }} caractères.'
+)]
+#[Assert\Regex(
+    pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{1,16}$/',
+)]
+
 private ?string $slug = null;
 
 #[ORM\Column(type: Types::TEXT)]
@@ -30,6 +54,8 @@ private ?\DateTimeImmutable $created_at = null;
 private ?\DateTimeImmutable $updated_at = null;
 
 #[ORM\Column]
+#[Assert\Positive]
+#[Assert\NotBlank]
 private ?int $duration = null;
 
 
