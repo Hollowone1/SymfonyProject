@@ -32,6 +32,9 @@ class RecipeType extends AbstractType
             ->add('updated_at', null, [
                 'widget' => 'single_text',
             ])
+            ->add('duration', null, [
+                'label' => 'Durée (en minutes)',
+            ])
             ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'autoSlug'])
         ;
     }

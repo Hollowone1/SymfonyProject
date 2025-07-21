@@ -15,6 +15,5 @@ final class BanWord extends Constraint
         $this->banWords = $banWord;
         $this->message = $message;
 
-        parent::__construct($groups, $payload);
     }
 }
