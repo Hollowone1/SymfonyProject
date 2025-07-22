@@ -5,5 +5,5 @@ une nouvelle demande de contact a été soumise
 <ul>
     <li>Nom : {{ data.name }}</li>
     <li>Email : {{ data.email }}</li>
-    <li><strong>Message : {{ data.message }}</strong></li>
+    <li><strong>Message : {{ data.message | nl2br }}</strong></li>
 </ul>

@@ -13,6 +13,9 @@ class ContactDTO
     #[Assert\Email(message: 'L\'email n\'est pas valide')]
     public string $email = '';
 
+    #[Assert\NotBlank(message: 'le service est obligatoire')]
+    public string $service = '';
+
     #[Assert\NotBlank(message: 'le message est obligatoire')]
     public string $message = '';
 }

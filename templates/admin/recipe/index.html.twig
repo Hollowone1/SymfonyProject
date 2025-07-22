@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
 
 {% block title %}Recipes{% endblock %}
 
@@ -6,7 +6,7 @@
 
     <h1 class="text-4xl font-bold mb-6">Liste des Recettes</h1>
     <p class="text-2xl text-emerald-500 py-6"> Bienvenue sur la page des recettes !</p>
-    <a href="{{ path('create') }}" class="bg-emerald-600 text-white px-4 py-6 rounded hover:bg-emerald-700 mb-4 inline-block">
+    <a href="{{ path('admin_recipe_create') }}" class="bg-emerald-600 text-white px-4 py-6 rounded hover:bg-emerald-700 mb-4 inline-block">
         Créer une nouvelle recette
     </a>
     <table class="table-auto w-full">
@@ -25,12 +25,12 @@
                     <td class="px-4 py-2">{{ recipe.title }}</td>
                     <td class="px-4 py-2">{{ recipe.slug }}</td>
                     <td class="px-4 py-2">
-                        <a href="{{ path('show', { 'slug': recipe.slug, 'id': recipe.id }) }}" class="text-blue-500 hover:underline">Voir</a>
-                        <form action="{{ path('recipe_delete', { 'id': recipe.id }) }}" method="POST" class="inline-block">
+                        <form action="{{ path('admin_recipe_delete', { 'id': recipe.id }) }}" method="POST" class="inline-block" onsubmit="return confirm('Voulez-vous vraiment supprimer cette recette ?');">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="text-red-500 hover:underline ml-2">Supprimer</button>
                         </form>
-                        <a href="{{ path('edit', { 'id': recipe.id }) }}" class="text-green-500 hover:underline ml-2">Modifier</a>
+
+                        <a href="{{ path('admin_recipe_edit', { 'id': recipe.id }) }}" class="text-green-500 hover:underline ml-2">Modifier</a>
                     </td>
                 </tr>
             {% else %}
@@ -39,4 +39,6 @@
                 </tr>
             {% endfor %}
         </tbody>
+    </table>
+
 {% endblock %}

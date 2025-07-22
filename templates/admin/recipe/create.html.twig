@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/admin.html.twig' %}
 
 {% block body %}
     {% form_theme form 'tailwind_2_layout.html.twig' %}
 
-    <h1 class="text-4xl font-bold mb-6 py-6">{{ recipe.title }}</h1>
+    <h1 class="text-4xl font-bold mb-6 py-6">Créer une nouvelle recette</h1>
 
     {{ form_start(form, { attr: { class: 'py-6' } }) }}
 
