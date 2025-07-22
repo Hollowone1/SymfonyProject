@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use App\Entity\Recipe;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface as EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +18,14 @@ final class RecipeController extends AbstractController
 {
 
     #[Route('/', name: 'index')]
-    public function index(Request $request, RecipeRepository $repository): Response
+    public function index(Request $request, RecipeRepository $repository, CategoryRepository $categoryRepository, EntityManagerInterface $em): Response
     {
         $recipes = $repository->findAll();
+        $categories = $categoryRepository->findAll();
 
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes,
+            'categories' => $categories,
             'controller_name' => 'RecipeController',
         ]);
     }

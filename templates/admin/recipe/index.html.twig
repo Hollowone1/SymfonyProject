@@ -16,11 +16,13 @@
                 <th class="px-4 py-2">Title</th>
                 <th class="px-4 py-2">Slug</th>
                 <th class="px-4 py-2">Actions</th>
+                <th class="px-4 py-2">Catégorie</th>
             </tr>
         </thead>
         <tbody>
             {% for recipe in recipes %}
                 <tr class="border-b">
+                    <td class="px-4 py-2">{{ recipe.category.name | default }}</td>
                     <td class="px-4 py-2">{{ recipe.id }}</td>
                     <td class="px-4 py-2">{{ recipe.title }}</td>
                     <td class="px-4 py-2">{{ recipe.slug }}</td>
