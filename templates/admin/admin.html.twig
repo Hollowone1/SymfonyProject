@@ -38,13 +38,10 @@
          class="block py-2 px-3 {{ app.request.attributes.get('_route') == 'admin_recipe_index' ? 'text-emerald-600 font-semibold' : 'text-emerald-400' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Recettes</a>
     </li>
     <li>
-      <a href="{{ path('profil') }}"
-         class="block py-2 px-3 {{ app.request.attributes.get('_route') == 'profil' ? 'text-emerald-600 font-semibold' : 'text-emerald-400' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profil</a>
+      <a href="{{ path('admin_category') }}"
+         class="block py-2 px-3 {{ app.request.attributes.get('_route') == 'admin_category' ? 'text-emerald-600 font-semibold' : 'text-emerald-400' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Catégories</a>
     </li>
-    <li>
-      <a href="{{ path('contact') }}"
-         class="block py-2 px-3 {{ app.request.attributes.get('_route') == 'contact' ? 'text-emerald-600 font-semibold' : 'text-emerald-400' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-    </li>
+   
   </ul>
 </div>
   </div>
