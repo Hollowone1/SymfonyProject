@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Image;
 
 class RecipeType extends AbstractType
 {
@@ -30,6 +32,10 @@ class RecipeType extends AbstractType
             ])
             ->add('slug', TextType::class, [
                 'label' => 'Slug',
+                'required' => false,
+            ])
+            ->add('thumbnailFile',FileType::class,[
+                'label' => 'image',
                 'required' => false,
             ])
             ->add('category', EntityType::class, [

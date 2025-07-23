@@ -8,10 +8,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[UniqueEntity(fields: ['title'], message: 'Ce titre est déjà utilisé.')]
 #[UniqueEntity(fields: ['slug'], message: 'Ce slug est déjà utilisé.')]
+#[Vich\Uploadable()]
 class Recipe
 {
     #[ORM\Id]
@@ -61,6 +63,24 @@ private ?int $duration = null;
 #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
 private ?Category $category = null;
 
+#[ORM\Column(length: 255, nullable: true)]
+private ?string $thumbnail = null;
+
+#[Vich\UploadableField(mapping: 'recipes', fileNameProperty: 'thumbnail')]
+#[Assert\Image]
+private ?string $thumbnailFile = null;
+
+public function getThumbnailFile(): ?string
+{
+    return $this->thumbnailFile;
+}       
+
+public function setThumbnailFile(?string $thumbnailFile): static
+{
+    $this->thumbnailFile = $thumbnailFile;  
+
+    return $this;
+}
 
     public function getId(): ?int
     {
@@ -147,6 +167,18 @@ private ?Category $category = null;
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): static
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }
