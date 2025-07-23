@@ -20,6 +20,12 @@
         </div>
 
         <div class="mb-4 bg-emerald-200 rounded-lg py-4 flex flex-1/2">
+            {{ form_label(form.thumbnailFile) }}
+            {{ form_widget(form.thumbnailFile) }}
+            {{ form_errors(form.thumbnailFile) }}
+        </div>
+        
+        <div class="mb-4 bg-emerald-200 rounded-lg py-4 flex flex-1/2">
             {{ form_label(form.content) }}
             {{ form_widget(form.content) }}
             {{ form_errors(form.content) }}

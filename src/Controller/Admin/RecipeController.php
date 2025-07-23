@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 #[Route("admin/recettes", name:"admin_recipe")]
 final class RecipeController extends AbstractController
@@ -32,7 +33,7 @@ final class RecipeController extends AbstractController
 
 
     #[Route('/{id}', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function edit(Request $request, int $id, Recipe $recipe, EntityManager $em): Response
+    public function edit(Request $request, int $id, Recipe $recipe, EntityManager $em, UploaderHelper $uploaderHelper): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
