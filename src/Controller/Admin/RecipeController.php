@@ -13,15 +13,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route("admin/recettes", name:"admin_recipe")]
 final class RecipeController extends AbstractController
 {
 
-    #[Route('/', name: 'index')]
+    #[IsGranted('ROLE_USER')]
     public function index(Request $request, RecipeRepository $repository, CategoryRepository $categoryRepository, EntityManagerInterface $em): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $recipes = $repository->findAll();
         $categories = $categoryRepository->findAll();
 
